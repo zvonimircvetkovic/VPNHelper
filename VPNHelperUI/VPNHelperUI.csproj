@@ -113,6 +113,10 @@
       <Project>{1f09eb2d-6dbd-4ba6-b65a-88e60a1fdf91}</Project>
       <Name>VPNHelperLibrary</Name>
     </ProjectReference>
+    <ProjectReference Include="..\VPNHelperService\VPNHelperService.csproj">
+      <Project>{E5061C41-0DF4-4FA8-9CB7-78A617C23B70}</Project>
+      <Name>VPNHelperService</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

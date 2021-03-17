@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VPNHelperUI", "VPNHelperUI\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VPNHelperLibrary", "VPNHelperLibrary\VPNHelperLibrary.csproj", "{1F09EB2D-6DBD-4BA6-B65A-88E60A1FDF91}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VPNHelperService", "VPNHelperService\VPNHelperService.csproj", "{E5061C41-0DF4-4FA8-9CB7-78A617C23B70}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{1F09EB2D-6DBD-4BA6-B65A-88E60A1FDF91}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F09EB2D-6DBD-4BA6-B65A-88E60A1FDF91}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F09EB2D-6DBD-4BA6-B65A-88E60A1FDF91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5061C41-0DF4-4FA8-9CB7-78A617C23B70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5061C41-0DF4-4FA8-9CB7-78A617C23B70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5061C41-0DF4-4FA8-9CB7-78A617C23B70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5061C41-0DF4-4FA8-9CB7-78A617C23B70}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

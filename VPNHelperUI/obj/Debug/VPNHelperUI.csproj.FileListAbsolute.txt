@@ -25,3 +25,5 @@ D:\Projects\VPNHelper\VPNHelperUI\obj\Debug\App.baml
 D:\Projects\VPNHelper\VPNHelperUI\obj\Debug\Views\ShellView.baml
 D:\Projects\VPNHelper\VPNHelperUI\bin\Debug\VPNHelperLibrary.dll
 D:\Projects\VPNHelper\VPNHelperUI\bin\Debug\VPNHelperLibrary.pdb
+D:\Projects\VPNHelper\VPNHelperUI\bin\Debug\VPNHelperService.dll
+D:\Projects\VPNHelper\VPNHelperUI\bin\Debug\VPNHelperService.pdb
