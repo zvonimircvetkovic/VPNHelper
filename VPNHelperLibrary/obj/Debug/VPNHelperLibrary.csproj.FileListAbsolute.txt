@@ -1,0 +1,6 @@
+D:\Projects\VPNHelper\VPNHelperLibrary\bin\Debug\VPNHelperLibrary.dll
+D:\Projects\VPNHelper\VPNHelperLibrary\bin\Debug\VPNHelperLibrary.pdb
+D:\Projects\VPNHelper\VPNHelperLibrary\obj\Debug\VPNHelperLibrary.csprojAssemblyReference.cache
+D:\Projects\VPNHelper\VPNHelperLibrary\obj\Debug\VPNHelperLibrary.csproj.CoreCompileInputs.cache
+D:\Projects\VPNHelper\VPNHelperLibrary\obj\Debug\VPNHelperLibrary.dll
+D:\Projects\VPNHelper\VPNHelperLibrary\obj\Debug\VPNHelperLibrary.pdb
