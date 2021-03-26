@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using VPNHelperCommon.Clients;
 using VPNHelperCommon.Models;
+using VPNHelperLibrary.Models;
 
 namespace VPNHelperService.Services
 {
@@ -19,7 +20,7 @@ namespace VPNHelperService.Services
             ApiClient = apiClient;
         }
 
-        public async Task<IEnumerable<IResult>> GetServers(string country)
+        public async Task<bool> GetServers(CountryModel country)
         {
             try
             {
@@ -28,20 +29,16 @@ namespace VPNHelperService.Services
 
                 if (response.Content != null && response.Content.Any())
                 {
-                    if (response.Content.Any(x => x.Domain.StartsWith(country, StringComparison.InvariantCultureIgnoreCase)))
+                    if (response.Content.Any(x => x.Domain.StartsWith(country.Abrv, StringComparison.InvariantCultureIgnoreCase) && x.Load < 50))
                     {
-                        var servers = response.Content.Where(x => x.Domain.StartsWith(country, StringComparison.InvariantCultureIgnoreCase)).OrderBy(x => x.Load);
-                        await GenerateServerExcelFile(servers);
+                        var servers = response.Content.Where(x => x.Domain.StartsWith(country.Abrv, StringComparison.InvariantCultureIgnoreCase)).OrderBy(x => x.Load);
+                        await GenerateServerExcelFile(servers, country);
 
-                        return servers.Take(10).Select(x => new Result
-                        {
-                            Server = x.Domain,
-                            Load = $"{x.Load}%"
-                        });
+                        return true;
                     }
-                    return null;
+                    return false;
                 }
-                return null;
+                return false;
             }
             catch (Exception ex)
             {
@@ -49,10 +46,10 @@ namespace VPNHelperService.Services
             }
         }
 
-        private async Task GenerateServerExcelFile(IEnumerable<Server> servers)
+        private async Task GenerateServerExcelFile(IEnumerable<Server> servers, CountryModel country)
         {
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-            using (var package = new ExcelPackage(new FileInfo($"D:\\Servers\\Servers-{DateTime.Now:dd-MM-yyyy-HH-mm}.xlsx")))
+            using (var package = new ExcelPackage(new FileInfo($"D:\\Servers\\Servers-{country.Name}-{DateTime.Now:dd-MM-yyyy-HH-mm-ss}.xlsx")))
             {
                 var worksheet = package.Workbook.Worksheets.Add("Sheet 1");
 
@@ -64,7 +61,7 @@ namespace VPNHelperService.Services
 
                 row++;
 
-                foreach (var server in servers.Take(100))
+                foreach (var server in servers.Where(x => x.Load < 50).Take(1000))
                 {
                     var column = 1;
                     worksheet.Cells[row, column].Value = server.Domain;

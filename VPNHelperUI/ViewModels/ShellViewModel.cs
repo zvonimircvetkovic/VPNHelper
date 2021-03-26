@@ -17,8 +17,6 @@ namespace VPNHelperUI.ViewModels
 
         public BindableCollection<CountryModel> Countries { get; set; }
 
-        public BindableCollection<VPNHelperCommon.Models.IResult> Servers { get; set; }
-
         public string ResultText { get; set; }
 
         public Visibility Visibility { get; set; }
@@ -53,27 +51,18 @@ namespace VPNHelperUI.ViewModels
         {
             if (SelectedCountry != null)
             {
-                var result = await NordVPNService.GetServers(SelectedCountry.Abrv);
-                if (result != null && result.Any())
+                var result = await NordVPNService.GetServers(SelectedCountry);
+                if (result)
                 {
-                    UpdateListVisibility(true);
-
-                    UpdateResultText("Top 10 results based on load:");
-
-                    Servers = new BindableCollection<VPNHelperCommon.Models.IResult>(result);
-                    NotifyOfPropertyChange(() => Servers);
+                    UpdateResultText("File Saved");
                 }
                 else
                 {
-                    UpdateListVisibility(false);
-
                     UpdateResultText("No servers found.");
                 }
             }
             else
             {
-                UpdateListVisibility(false);
-
                 UpdateResultText("Please select a country.");
             }
         }
@@ -82,12 +71,6 @@ namespace VPNHelperUI.ViewModels
         {
             ResultText = text;
             NotifyOfPropertyChange(() => ResultText);
-        }
-
-        private void UpdateListVisibility(bool visible)
-        {
-            Visibility = visible ? Visibility.Visible : Visibility.Hidden;
-            NotifyOfPropertyChange(() => Visibility);
         }
     }
 }

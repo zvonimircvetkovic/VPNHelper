@@ -69,6 +69,10 @@
       <Project>{8CDF1825-A413-4A3F-98B3-88B816420E36}</Project>
       <Name>VPNHelperCommon</Name>
     </ProjectReference>
+    <ProjectReference Include="..\VPNHelperLibrary\VPNHelperLibrary.csproj">
+      <Project>{1F09EB2D-6DBD-4BA6-B65A-88E60A1FDF91}</Project>
+      <Name>VPNHelperLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
