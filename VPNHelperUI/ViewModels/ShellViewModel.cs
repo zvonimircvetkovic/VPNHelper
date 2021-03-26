@@ -17,14 +17,26 @@ namespace VPNHelperUI.ViewModels
 
         public BindableCollection<CountryModel> Countries { get; set; }
 
+        public BindableCollection<VPNHelperCommon.Models.IResult> Servers { get; set; }
+
+        public string ResultText { get; set; }
+
+        public Visibility Visibility { get; set; }
+
         private CountryModel selectedCountry;
 
         public ShellViewModel(INordVPNService nordVPNService)
         {
             NordVPNService = nordVPNService;
+        }
+
+        protected override async void OnInitialize()
+        {
+            base.OnInitialize();
 
             DataAccess da = new DataAccess();
-            Countries = new BindableCollection<CountryModel>(da.GetCountriesAsync().Result);
+            Countries = new BindableCollection<CountryModel>(await da.GetCountriesAsync());
+            NotifyOfPropertyChange(() => Countries);
         }
 
         public CountryModel SelectedCountry 
@@ -44,17 +56,38 @@ namespace VPNHelperUI.ViewModels
                 var result = await NordVPNService.GetServers(SelectedCountry.Abrv);
                 if (result != null && result.Any())
                 {
-                    MessageBox.Show(string.Join(", ", result));
+                    UpdateListVisibility(true);
+
+                    UpdateResultText("Top 10 results based on load:");
+
+                    Servers = new BindableCollection<VPNHelperCommon.Models.IResult>(result);
+                    NotifyOfPropertyChange(() => Servers);
                 }
                 else
                 {
-                    MessageBox.Show("No servers found.");
+                    UpdateListVisibility(false);
+
+                    UpdateResultText("No servers found.");
                 }
             }
             else
             {
-                MessageBox.Show("Please select a country.");
+                UpdateListVisibility(false);
+
+                UpdateResultText("Please select a country.");
             }
+        }
+
+        private void UpdateResultText(string text)
+        {
+            ResultText = text;
+            NotifyOfPropertyChange(() => ResultText);
+        }
+
+        private void UpdateListVisibility(bool visible)
+        {
+            Visibility = visible ? Visibility.Visible : Visibility.Hidden;
+            NotifyOfPropertyChange(() => Visibility);
         }
     }
 }

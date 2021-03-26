@@ -12,7 +12,7 @@ namespace VPNHelperLibrary
         IEnumerable<CountryModel> Countries = new List<CountryModel>
         { 
             new CountryModel { Name = "Croatia", Abrv = "cro" },
-            new CountryModel { Name = "US", Abrv = "us" },
+            new CountryModel { Name = "United States", Abrv = "us" },
             new CountryModel { Name = "Netherlands", Abrv = "nl" }
         };
 

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VPNHelperUI.Views"
         mc:Ignorable="d"
-        Title="ShellView" Height="450" Width="800">
+        Title="VPN Helper" Height="450" Width="800">
     <Grid>
         <!-- Definitions -->
         <Grid.ColumnDefinitions>
@@ -41,5 +41,12 @@
         <Button Grid.Column="3" Grid.Row="2" x:Name="Search">Search</Button>
 
         <!-- Row 3 -->
+        <TextBlock Padding="20px" Grid.Column="1" Grid.Row="3" FontSize="16" Text="{Binding ResultText}" />
+        <DataGrid Visibility="{Binding Visibility}" x:Name="Servers" Margin="20px" Grid.Column="2" Grid.Row="3" AutoGenerateColumns="False" CanUserAddRows="False" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Server" Binding="{Binding Path=Server}" MinWidth="150" />
+                <DataGridTextColumn Header="Load" Binding="{Binding Path=Load}" />
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>

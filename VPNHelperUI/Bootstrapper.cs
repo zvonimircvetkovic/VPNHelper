@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using Ninject;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace VPNHelperUI
 {
     public class Bootstrapper : BootstrapperBase
     {
-        private SimpleContainer container = new SimpleContainer();
+        private IKernel Kernel;
 
         public Bootstrapper()
         {
@@ -21,19 +22,7 @@ namespace VPNHelperUI
 
         protected override void Configure()
         {
-            container.Instance(container);
-
-            container
-                .Singleton<IWindowManager, WindowManager>()
-                .Singleton<IEventAggregator, EventAggregator>()
-                .Singleton<INordVPNService, NordVPNService>();
-
-            GetType().Assembly.GetTypes()
-                .Where(type => type.IsClass)
-                .Where(type => type.Name.EndsWith("ViewModel"))
-                .ToList()
-                .ForEach(viewModelType => container.RegisterPerRequest(
-                    viewModelType, viewModelType.ToString(), viewModelType));
+            Kernel = new StandardKernel(new VPNHelperService.DIModule(), new VPNHelperCommon.DIModule(), new VPNHelperUI.DIModule());
         }
 
         protected override void OnStartup(object sender, StartupEventArgs e)
@@ -43,17 +32,18 @@ namespace VPNHelperUI
 
         protected override object GetInstance(Type service, string key)
         {
-            return container.GetInstance(service, key);
+            return Kernel.Get(service, key);
         }
 
         protected override IEnumerable<object> GetAllInstances(Type service)
         {
-            return container.GetAllInstances(service);
+            return Kernel.GetAll(service);
         }
 
-        protected override void BuildUp(object instance)
+        protected override void OnExit(object sender, EventArgs e)
         {
-            container.BuildUp(instance);
+            Kernel.Dispose();
+            base.OnExit(sender, e);
         }
     }
 }

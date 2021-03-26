@@ -1,6 +1,0 @@
-D:\Projects\VPNHelper\VPNHelperService\bin\Debug\VPNHelperService.dll
-D:\Projects\VPNHelper\VPNHelperService\bin\Debug\VPNHelperService.pdb
-D:\Projects\VPNHelper\VPNHelperService\obj\Debug\VPNHelperService.csprojAssemblyReference.cache
-D:\Projects\VPNHelper\VPNHelperService\obj\Debug\VPNHelperService.csproj.CoreCompileInputs.cache
-D:\Projects\VPNHelper\VPNHelperService\obj\Debug\VPNHelperService.dll
-D:\Projects\VPNHelper\VPNHelperService\obj\Debug\VPNHelperService.pdb
